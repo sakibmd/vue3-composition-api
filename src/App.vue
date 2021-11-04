@@ -1,26 +1,45 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h2>Hello World</h2>
+
+    <procedure-1></procedure-1> 
+    <procedure-2></procedure-2>
+
+    
+   
+
+    <!-- When using Reactive from other file | Approach 3 -->
+    {{ firstName }}
+    {{ lastName }}
+    <br />
+    {{ fullName }}
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Procedure1 from "./components/Procedure1.vue";
+import Procedure2 from "./components/Procedure2.vue";
+import { storedData } from "./store.js";
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Procedure1,
+    Procedure2,
+
+  },
+  name: "App",
+  
+
+
+
+  setup() {
+    let { firstName, lastName, fullName } = storedData();
+    return {
+      firstName,
+      lastName,
+      fullName,
+    };
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
