@@ -1,7 +1,8 @@
 <template>
   <div>
     <hr />
-    <h2>Following Procedure One | Ref</h2>
+    <h2>Procedure 1 | Ref()</h2>
+    Enter Name: <input type="text" placeholder="name" v-model="name" /> <br />
     Name: {{ name }} & Age: {{ age }} <br />{{ location }} <br />
     Single Post: {{ singlePost.title }}
     <!-- <ul>
@@ -9,11 +10,14 @@
         {{ post.title }}
       </li>
     </ul> -->
+
+    <h4>Example of Refs in Composition Api</h4>
+    <input type="text" ref="inputRef" />
   </div>
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 export default {
   setup() {
     const name = ref("Sakib");
@@ -22,6 +26,13 @@ export default {
     const country = ref("Bangladesh");
     var posts = ref([]);
     const singlePost = ref("");
+    const inputRef = ref("");
+
+    watch(name, (newVal, oldVal) => {
+      console.log(newVal, oldVal);
+      // console.log(newVal);
+      // console.log(oldVal);
+    });
 
     (function fectApi() {
       fetch("https://jsonplaceholder.typicode.com/posts/1")
@@ -31,6 +42,8 @@ export default {
 
     //mounted
     onMounted(() => {
+      inputRef.value.focus(); //focut input field using Refs
+
       fetch("https://jsonplaceholder.typicode.com/posts")
         .then((res) => res.json())
         .then((data) => (posts.value = data));
@@ -49,6 +62,7 @@ export default {
       country,
       location,
       singlePost,
+      inputRef,
     };
   },
 };
