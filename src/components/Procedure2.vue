@@ -43,7 +43,7 @@ export default {
         // console.log("Old Fav Actress: ", oldValues[2]);
       },
       {
-        deep: true,
+        deep: true, //used for object
       }
     );
     return toRefs(state);
